@@ -1,9 +1,10 @@
 pipeline {
     agent any
 
-    //environment {
-    //    
-    //}
+    environment {
+        SECRET_KEY = credentials('django-personal-secret-key')
+        IS_DEBUGGING = credentials('django-personal-is-debugging')
+    }
 
     stages {
 
