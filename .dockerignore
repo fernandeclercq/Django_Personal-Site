@@ -1,0 +1,8 @@
+*/venv
+
+*.crt
+
+*.key
+
+*.gitignore
+*.git
