@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  django-website:
+    image: fornan/django-personal:latest
+    container_name: django_personal-site
+    build: .
+    volumes:
+      - ${PWD}:/app
+      - ${PWD}/certs:/app/certs/
+
+    ports:
+      - "127.0.0.1:2000:2000"
+
+    environment:
+      SECRET_KEY: "${SECRET_KEY}"
+      IS_DEBUGGING: "${IS_DEBUGGING}"
+    
+    command: python manage.py runserver_plus --cert-file certs/cert.pem --key-file certs/privkey.pem 0.0.0.0:2000
