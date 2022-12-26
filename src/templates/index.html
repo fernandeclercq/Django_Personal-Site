@@ -8,7 +8,7 @@
       <div class="container text-white py-5">
         <div class="row py-lg-5">
           <div class="col-lg-7">
-            <h1>Bootstrap 5 Blog - A free template by Bootstrapious</h1><a class="link-underline mt-3" href="#!">Discover More</a>
+            <h1>Welcome to Fernando's website. A place for electronics and embedded programming.</h1>
           </div>
         </div><a class="continue text-gray-400 position-absolute bottom-0 mb-5 z-index-20 link-transition small text-uppercase" href="#intro"><i class="fas fa-long-arrow-alt-down"></i> Scroll Down</a>
       </div>
@@ -18,8 +18,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
-            <h2 class="h3">Some great intro here</h2>
-            <p class="text-lg fw-light lh-lg mb-0">Place a nice <strong>introduction</strong> here <strong>to catch reader's attention</strong>. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderi.</p>
+            <h2 class="h3">Fernando's website</h2>
+            <p class="text-lg fw-light lh-lg mb-0">My name is Fernando Declercq. I have my background studies in electronical engineering. <br>
+              This is my personal website where I blog about my personal projects.</p>
           </div>
         </div>
       </div>
@@ -89,9 +90,9 @@
               <img class="img-fluid" src="{{ latest_post.thumbnail.url }}" alt="..."/>
             </a>
             <div class="d-flex align-items-center justify-content-between mb-2">
-              <small class="text-gray-500">{{ latest_post.timestamp }}</small>
+              <small class="text-gray-500">{{ latest_post.timestamp | date }}</small>
               {% for category in latest_post.categories.all %}
-              <a class="small fw-bold text-uppercase small" href="!#">{{ category.title }}</a>
+              <a class="small fw-bold text-uppercase small" href="#">{{ category.title }}</a>
               {% endfor %}
             </div>
             <h3 class="h4">

@@ -8,4 +8,7 @@ class Signup(models.Model):
 
 
     def __str__(self) -> str:
-        return self.email
+        return "{} - {}".format(
+                self.id,
+                self.email
+                )
