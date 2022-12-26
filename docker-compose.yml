@@ -16,4 +16,4 @@ services:
       SECRET_KEY: "${SECRET_KEY}"
       IS_DEBUGGING: "${IS_DEBUGGING}"
     
-    command: python manage.py runserver_plus --cert-file certs/cert.pem --key-file certs/privkey.pem 0.0.0.0:2000
+    command: python src/manage.py runserver_plus --cert-file certs/cert.pem --key-file certs/privkey.pem 0.0.0.0:2000
