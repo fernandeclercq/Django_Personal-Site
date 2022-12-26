@@ -1,11 +1,18 @@
 FROM python:3.10.8-slim-buster
 
-# PYTHONUNBUFFERED=1 forwards logs
-ENV PYTHONUNBUFFERED=1 
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
 
 CMD ["mkdir", "certs"]
+
+RUN pip install --upgrade pip
+
+RUN apt-get update \
+    && apt-get -y install libpq-dev gcc \
+    && pip install psycopg2
 
 COPY requirements.txt requirements.txt
 
