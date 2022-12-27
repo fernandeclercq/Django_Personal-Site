@@ -135,3 +135,6 @@ dmypy.json
 *.crt
 *.key
 *.pem
+
+
+src/media_root/*
