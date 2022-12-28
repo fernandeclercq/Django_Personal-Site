@@ -137,4 +137,4 @@ dmypy.json
 *.pem
 
 
-src/media_root/*
+src/media_root/
