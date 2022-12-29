@@ -1,6 +1,30 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger 
 from django.shortcuts import render
 from .models import Post
 from marketing.models import Signup
+from django.db.models import Count, Q
+
+
+def get_categories_count():
+    all_categories = Post.objects.values('categories__title').annotate(Count('categories'))
+    return all_categories
+
+
+def search(request):
+    posts = Post.objects.all()
+    
+    query = request.GET.get('search-item')
+    if query:
+        filtered_posts = posts.filter(
+            Q(title__icontains=query) |
+            Q(overview__icontains=query)
+        ).distinct()
+    context = {
+        'filtered_posts': filtered_posts,
+    }
+    
+    return render(request, 'search_results.html', context)
+    pass
 
 
 def index(request):
@@ -21,10 +45,34 @@ def index(request):
 
 
 def blog(request):
-    return render(request, 'blog.html', {})
+    category_count = get_categories_count()
+    posts = Post.objects.all()
+    most_recent_posts = Post.objects.order_by('-timestamp')[0:3]
+    paginator = Paginator(posts, 2)
+    page_request = 'page'
+    page = request.GET.get('page')
+
+    try:
+        paginated = paginator.page(page)
+    
+    except PageNotAnInteger:
+        paginated = paginator.page(1)
+    except EmptyPage:
+        paginated = paginator.page(paginator.num_pages)
+
+    context = {
+        'paginated_set': paginated,
+        'most_recent_posts': most_recent_posts,
+        'page': page_request,
+        'category_list': category_count,
+    }
 
 
-def post(request):
+
+    return render(request, 'blog.html', context)
+
+
+def post(request, id):
     return render(request, 'post.html', {})
 
 

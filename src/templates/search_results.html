@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+<section>
+    <div class="container">
+      <div class="row gy-5">
+        <!-- Latest Posts -->
+        <main class="col-lg-8"> 
+          <div class="container">
+            <div class="row gy-4 mb-5">
+                <h2>Search results: </h4>
+                {% for post in filtered_posts %}
+                <div class="d-flex align-items-center">
+                    <a class="text-reset mb-3" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    <img class="img-fluid flex-shrink-0" src="{{ post.thumbnail.url }}" alt="..." width="55">
+                    <div class="ms-3">
+                        <p class="mb-2 fw-bold text-gray-700 lh-1">{{ post.overview }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Pagination -->
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+
+
+{% endblock %}

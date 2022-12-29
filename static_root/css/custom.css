@@ -1,1 +1,5 @@
 /* your styles go here */
+
+.img-thumbnail-resized {
+    width: 250px;
+}
