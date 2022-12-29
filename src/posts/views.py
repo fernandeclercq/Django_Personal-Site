@@ -2,11 +2,29 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from .models import Post
 from marketing.models import Signup
-from django.db.models import Count
+from django.db.models import Count, Q
+
 
 def get_categories_count():
     all_categories = Post.objects.values('categories__title').annotate(Count('categories'))
     return all_categories
+
+
+def search(request):
+    posts = Post.objects.all()
+    
+    query = request.GET.get('search-item')
+    if query:
+        filtered_posts = posts.filter(
+            Q(title__icontains=query) |
+            Q(overview__icontains=query)
+        ).distinct()
+    context = {
+        'filtered_posts': filtered_posts,
+    }
+    
+    return render(request, 'search_results.html', context)
+    pass
 
 
 def index(request):
