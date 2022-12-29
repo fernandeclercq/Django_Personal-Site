@@ -2,6 +2,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from .models import Post
 from marketing.models import Signup
+from django.db.models import Count
+
+def get_categories_count():
+    all_categories = Post.objects.values('categories__title').annotate(Count('categories'))
+    return all_categories
 
 
 def index(request):
@@ -22,6 +27,7 @@ def index(request):
 
 
 def blog(request):
+    category_count = get_categories_count()
     posts = Post.objects.all()
     most_recent_posts = Post.objects.order_by('-timestamp')[0:3]
     paginator = Paginator(posts, 2)
@@ -40,9 +46,9 @@ def blog(request):
         'paginated_set': paginated,
         'most_recent_posts': most_recent_posts,
         'page': page_request,
+        'category_list': category_count,
     }
 
-    print(paginated[0].get_absolute_url)
 
 
     return render(request, 'blog.html', context)
