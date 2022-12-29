@@ -11,62 +11,46 @@
             <div class="container">
               <div class="row gy-4 mb-5">
                 <!-- post -->
-                <div class="col-xl-6"><a class="mb-3" href="post.html"><img class="img-fluid" src="{% static 'img/blog-post-1.jpeg' %}" alt="..."/></a>
-                  <div class="d-flex align-items-center justify-content-between mb-2"><small class="text-gray-500">20 May | 2016</small><a class="small fw-bold text-uppercase small" href="!#">Business</a></div>
-                  <h3 class="h4"><a class="text-dark" href="post.html">Alberto Savoia Can Teach You About Interior</a></h3>
-                  <p class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                {% for post in paginated_set %}
+                <div class="col-xl-6">
+                  <a class="mb-3" href="{{ post.get_absolute_url }}">
+                    <img class="img-fluid img-thumbnail-resized" src="{{ post.thumbnail.url }}" alt="..."/>
+                  </a>
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    {% comment %} <small class="text-gray-500">20 May | 2016</small> {% endcomment %}
+                    {% for category in post.categories.all %}
+                    <a class="small fw-bold text-uppercase small" href="!#">{{ category }}</a>
+                    {% endfor %}
+                  </div>
+                  <h3 class="h4">
+                    <a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                  </h3>
+                  <p class="text-muted text-sm">{{ post.overview }}</p>
                   <ul class="list-inline list-separated text-gray-500 mb-0">
-                    <li class="list-inline-item"><a class="d-flex align-items-center flex-wrap text-reset" href="!#">
-                        <div class="avatar flex-shrink-0"><img class="img-fluid" src="{% static 'img/avatar-3.jpg' %}" alt="..."/></div><small>John Doe</small></a></li>
-                    <li class="list-inline-item small"><i class="far fa-clock"></i> 2 months ago</li>
-                    <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
+                    <li class="list-inline-item">
+                      <a class="d-flex align-items-center flex-wrap text-reset" href="#">
+                        <div class="avatar flex-shrink-0">
+                          <img class="img-fluid" src="{{ post.author.profile_picture.url }}" alt="..."/>
+                        </div>
+                        <small> {{ post.author }}</small>
+                      </a>
+                    </li>
+                    <li class="list-inline-item small"><i class="far fa-clock"></i> {{ post.timestamp | timesince }} ago</li>
+                    <li class="list-inline-item small"><i class="far fa-comment"></i> {{ post.comment_count }}</li>
                   </ul>
                 </div>
-                <!-- post             -->
-                <div class="col-xl-6"><a class="mb-3" href="post.html"><img class="img-fluid" src="{% static 'img/blog-post-2.jpg' %}" alt="..."/></a>
-                  <div class="d-flex align-items-center justify-content-between mb-2"><small class="text-gray-500">20 May | 2016</small><a class="small fw-bold text-uppercase small" href="!#">Business</a></div>
-                  <h3 class="h4"><a class="text-dark" href="post.html">Alberto Savoia Can Teach You About Interior</a></h3>
-                  <p class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                  <ul class="list-inline list-separated text-gray-500 mb-0">
-                    <li class="list-inline-item"><a class="d-flex align-items-center flex-wrap text-reset" href="!#">
-                        <div class="avatar flex-shrink-0"><img class="img-fluid" src="{% static 'img/avatar-2.jpg' %}" alt="..."/></div><small>John Doe</small></a></li>
-                    <li class="list-inline-item small"><i class="far fa-clock"></i> 2 months ago</li>
-                    <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                  </ul>
-                </div>
-                <!-- post             -->
-                <div class="col-xl-6"><a class="mb-3" href="post.html"><img class="img-fluid" src="{% static 'img/blog-post-3.jpeg' %}" alt="..."/></a>
-                  <div class="d-flex align-items-center justify-content-between mb-2"><small class="text-gray-500">20 May | 2016</small><a class="small fw-bold text-uppercase small" href="!#">Business</a></div>
-                  <h3 class="h4"><a class="text-dark" href="post.html">Alberto Savoia Can Teach You About Interior</a></h3>
-                  <p class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                  <ul class="list-inline list-separated text-gray-500 mb-0">
-                    <li class="list-inline-item"><a class="d-flex align-items-center flex-wrap text-reset" href="!#">
-                        <div class="avatar flex-shrink-0"><img class="img-fluid" src="{% static 'img/avatar-3.jpg' %}" alt="..."/></div><small>John Doe</small></a></li>
-                    <li class="list-inline-item small"><i class="far fa-clock"></i> 2 months ago</li>
-                    <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                  </ul>
-                </div>
-                <!-- post -->
-                <div class="col-xl-6"><a class="mb-3" href="post.html"><img class="img-fluid" src="{% static 'img/blog-post-4.jpeg' %}" alt="..."/></a>
-                  <div class="d-flex align-items-center justify-content-between mb-2"><small class="text-gray-500">20 May | 2016</small><a class="small fw-bold text-uppercase small" href="!#">Business</a></div>
-                  <h3 class="h4"><a class="text-dark" href="post.html">Alberto Savoia Can Teach You About Interior</a></h3>
-                  <p class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                  <ul class="list-inline list-separated text-gray-500 mb-0">
-                    <li class="list-inline-item"><a class="d-flex align-items-center flex-wrap text-reset" href="!#">
-                        <div class="avatar flex-shrink-0"><img class="img-fluid" src="{% static 'img/avatar-1.jpg' %}" alt="..."/></div><small>John Doe</small></a></li>
-                    <li class="list-inline-item small"><i class="far fa-clock"></i> 2 months ago</li>
-                    <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                  </ul>
-                </div>
+                {% endfor %}
               </div>
               <!-- Pagination -->
               <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                  <li class="page-item"><a class="page-link" href="!#"><i class="fas fa-angle-left"></i></a></li>
-                  <li class="page-item active"><a class="page-link" href="!#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="!#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="!#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="!#"><i class="fas fa-angle-right"></i></a></li>
+                  {% if paginated_set.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?{{ page }}={{ paginated_set.previous_page_number }}"><i class="fas fa-angle-left"></i></a></li>
+                  {% endif %}
+                  <li class="page-item active"><a class="page-link" href="?{{ page }}={{ paginated_set.number }}">{{ paginated_set.number }}</a></li>
+                  {% if paginated_set.has_next %}
+                  <li class="page-item"><a class="page-link" href="?{{ page }}={{ paginated_set.next_page_number }}"><i class="fas fa-angle-right"></i></a></li>
+                  {% endif %}
                 </ul>
               </nav>
             </div>
@@ -87,34 +71,21 @@
             <!-- Widget [Latest Posts Widget]        -->
             <div class="card mb-5">
               <div class="card-body">
-                <h3 class="h6 mb-3">Latest Posts</h3><a class="text-reset mb-3" href="!#">
-                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="{% static 'img/small-thumbnail-1.jpg' %}" alt="..." width="55">
+                <h3 class="h6 mb-3">Latest Posts</h3>
+                {% for post in most_recent_posts %}
+                <a class="text-reset mb-3" href="{{ post.get_absolute_url }}">
+                  <div class="d-flex align-items-center">
+                    <img class="img-fluid flex-shrink-0" src="{{ post.thumbnail.url }}" alt="..." width="55">
                     <div class="ms-3">
-                      <p class="mb-2 fw-bold text-gray-700 lh-1">Alberto Savoia Can Teach You About</p>
+                      <p class="mb-2 fw-bold text-gray-700 lh-1">{{ post.title }}</p>
                       <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                        <li class="list-inline-item small"><i class="far fa-eye"></i> 500</li>
-                        <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
+                        <li class="list-inline-item small"><i class="far fa-eye"></i> {{post.view_count }}</li>
+                        <li class="list-inline-item small"><i class="far fa-comment"></i>{{ post.comment_count }}</li>
                       </ul>
                     </div>
-                  </div></a><a class="text-reset mb-3" href="!#">
-                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="{% static 'img/small-thumbnail-2.jpg' %}" alt="..." width="55">
-                    <div class="ms-3">
-                      <p class="mb-2 fw-bold text-gray-700 lh-1">Alberto Savoia Can Teach You About</p>
-                      <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                        <li class="list-inline-item small"><i class="far fa-eye"></i> 500</li>
-                        <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                      </ul>
-                    </div>
-                  </div></a><a class="text-reset" href="!#">
-                  <div class="d-flex align-items-center"><img class="img-fluid flex-shrink-0" src="{% static 'img/small-thumbnail-3.jpg' %}" alt="..." width="55">
-                    <div class="ms-3">
-                      <p class="mb-2 fw-bold text-gray-700 lh-1">Alberto Savoia Can Teach You About</p>
-                      <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                        <li class="list-inline-item small"><i class="far fa-eye"></i> 500</li>
-                        <li class="list-inline-item small"><i class="far fa-comment"></i> 12</li>
-                      </ul>
-                    </div>
-                  </div></a>
+                  </div>
+                </a>
+                {% endfor %}
               </div>
             </div>
             <!-- Widget [Categories Widget]-->
