@@ -3,3 +3,8 @@
 .img-thumbnail-resized {
     width: 250px;
 }
+
+.post-body {
+    width: 100%;
+    height: auto; 
+ }

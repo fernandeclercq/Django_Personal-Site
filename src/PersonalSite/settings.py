@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'tinymce',
     'posts',
     'marketing',
     
@@ -127,3 +128,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+TINYMCE_DEFAULT_CONFIG = {
+    "theme": "silver",
+    "height": 600,
+    "menubar": True,
+    "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,"
+    "searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,paste,"
+    "code,help,wordcount",
+    "toolbar1": "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft "
+    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+    "backcolor casechange permanentpen formatpainter removeformat",
+    "toolbar2": "pagebreak | charmap emoticons | "
+    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+    "a11ycheck ltr rtl | showcomments addcomment code",
+    }
+
+TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, "tinymce")
