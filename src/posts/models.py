@@ -23,7 +23,6 @@ class Category(models.Model):
         return self.title
 
 
-
 class Post(models.Model):
     title = models.CharField(max_length=100)
     overview = models.TextField()
@@ -49,4 +48,17 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={
             'id': self.id
         })
+
+
+class Comment(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
     
+    def __str__(self) -> str:
+        return "{} - {}".format(
+            self.id, self.content
+        )
+
