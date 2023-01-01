@@ -30,16 +30,16 @@ pipeline {
                 sh 'docker compose up -d'
             }
         }
-        stage('Update DB'){
-            steps {
-                echo "Updating DB..."
-                sh 'docker exec -it django_personal-site sh'
-                sh 'cd src'
-                sh 'python manage.py migrate'
-                sh 'exit'
-                echo "DB has been updated"
-            }
-        }
+        // stage('Update DB'){
+        //     steps {
+        //         echo "Updating DB..."
+        //         sh 'docker exec -it django_personal-site sh'
+        //         sh 'cd src'
+        //         sh 'python manage.py migrate'
+        //         sh 'exit'
+        //         echo "DB has been updated"
+        //     }
+        // }
 
     }
 }
