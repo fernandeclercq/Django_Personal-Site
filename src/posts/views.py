@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .models import Post
+from .models import Post, Author
 from .forms import CommentForm, PostForm
 from marketing.models import Signup
 from django.db.models import Count, Q
@@ -10,6 +10,13 @@ from django.db.models import Count, Q
 def get_categories_count():
     all_categories = Post.objects.values('categories__title').annotate(Count('categories'))
     return all_categories
+
+def get_user_author(user):
+    tmp = Author.objects.filter(user=user)
+    if tmp.exists:
+        return tmp[0]
+    else:
+        return None
 
 
 def search(request):
@@ -99,21 +106,47 @@ def post(request, id):
 
 
 def post_update(request, id):
-    pass
-
-def post_delete(request, id):
-    pass
-
-def post_create(request):
-    form = PostForm(request.POST or None)
+    title = 'Update'
+    post = get_object_or_404(Post, id=id)
+    form = PostForm(
+        request.POST or None, 
+        request.FILES or None, 
+        instance=post
+        )
+    author = get_user_author(request.user)
     if request.method == "POST":
         if form.is_valid():
+            form.instance.author = author
             form.save()
             return redirect(reverse("post-detail", kwargs={
                 'id': form.instance.id
             }))
     context = {
-        'form': form
+        'form': form,
+        'title': title,
     }
 
     return render(request, "post_create.html", context)
+
+def post_create(request):
+    title = 'Create'
+    form = PostForm(request.POST or None, request.FILES or None)
+    author = get_user_author(request.user)
+    if request.method == "POST":
+        if form.is_valid():
+            form.instance.author = author
+            form.save()
+            return redirect(reverse("post-detail", kwargs={
+                'id': form.instance.id
+            }))
+    context = {
+        'form': form,
+        'title': title
+    }
+
+    return render(request, "post_create.html", context)
+
+def post_delete(request, id):
+    post = get_object_or_404(Post, id=id)
+    post.delete()
+    return redirect(reverse('post-list'))
