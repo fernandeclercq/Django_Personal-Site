@@ -9,14 +9,17 @@
         </li>
         {% comment %} <li class="nav-item"><a class="nav-link " href="/post">Post</a>
         </li> {% endcomment %}
-        <li class="nav-item"><a class="nav-link " href="#">Contact</a>
-        </li>
+        <li class="nav-item"><a class="nav-link " href="#">Contact</a></li>
+        
         <li class="nav-item mt-2 mt-lg-0">
           <ul class="list-inline d-flex align-items-center">
             <li class="list-inline-item mx-lg-2 px-2 border-start border-end"><a class="search-btn nav-link small py-0 text-dark" href="#"><i class="fas fa-search"></i></a></li>
 <!--            <li class="list-inline-item d-flex align-items-end small"><a class="text-dark" href="#">EN</a><span class="underscore mb-1"></span><a class="text-gray-500" href="#">ES</a></li>-->
           </ul>
         </li>
+        {% if request.user.is_staff %}
+        <li class="nav-item"><a class="btn btn-primary" href="{% url 'post-create' %}">Create</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>
