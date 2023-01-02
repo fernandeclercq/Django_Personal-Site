@@ -19,10 +19,12 @@
                         {% endfor %}
                         
                     </ul>
+                    {% if request.user.is_authenticated %}
                     <div>
                         <a href="{% url 'post-update' id=post.id %}" class="btn btn-success">Update</a>
                         <a href="{% url 'post-delete' id=post.id %}" class="btn btn-danger">Delete</a>
                     </div>
+                    {% endif %}
                     <h1 class="mb-4">{{ post.title }}
                         <a href="#">
                             <i class="fa fa-bookmark-o"></i>
